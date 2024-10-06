@@ -1,0 +1,24 @@
+import { DataTypes } from "sequelize";
+
+export const KartProductsModel = (sequelize) => {
+    const KartProduct = sequelize.define('KartProducts', {
+        kartId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            references: {
+                model: 'Karts',
+                key: 'id',
+            },
+        },
+        productId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            references: {
+                model: 'Products',
+                key: 'id',
+            },
+        },
+    });
+
+    return KartProduct;
+};

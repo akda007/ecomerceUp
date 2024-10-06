@@ -1,0 +1,27 @@
+{
+  "name": "ecomerce-manager",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "babel src -d dist",
+    "start": "node src/index.js ",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "akda007",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "@sequelize/mysql": "^7.0.0-alpha.43",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "cors": "^2.8.5",
+    "ecomerce-manager": "file:",
+    "express": "^4.21.0",
+    "express-async-errors": "^3.1.1",
+    "i": "^0.3.7",
+    "nodemon": "^3.1.7",
+    "npm": "^10.9.0",
+    "sequelize": "^6.37.4"
+  }
+}
