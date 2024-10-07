@@ -20,13 +20,14 @@ export const KartProducts = KartProductsModel(sequelize)
 Karts.associate({Products: Products})
 Products.associate({Karts: Karts})
 
+
 Users.afterCreate(async (user, options) => {
     try {
         await Karts.create({
             userId: user.id
         })
     } catch (error) {
-        console.error("Error when creating a kart for User: ", error)
+        console.error("Error when creating a kart for the User: ", error)
     }
 })
 

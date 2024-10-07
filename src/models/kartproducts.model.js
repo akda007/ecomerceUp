@@ -18,6 +18,10 @@ export const KartProductsModel = (sequelize) => {
                 key: 'id',
             },
         },
+        amount: {
+            type: DataTypes.NUMBER,
+            allowNull: false
+        }
     });
 
     return KartProduct;

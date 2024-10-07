@@ -1,18 +1,26 @@
 import { Karts } from "../database/config.js"
+import { addProductToKartService, getKartProductsService } from "../services/kart.services.js"
 
 
-export const listKarts = async (req, res) => {
+export const listKartsController = async (req, res) => {
     const karts = await Karts.findAll()
 
     await res.json(karts)
 }
 
-export const addProductsToKart = async (req, res) => {
+export const addProductsToKartController = async (req, res) => {
     const { kartId } = req.params
-    const { productId } = req.body
+    const { productId, amount } = req.body
 
-    const kart = await Karts.findByPk(Number(kartId))
-    const result = await kart.addProduct(productId)
+    const result = await addProductToKartService(kartId, productId, amount)
 
     await res.json(result)
+}
+
+export const getKartProductsController = async (req, res) => {
+    const { kartId } = req.params
+
+    const result = await getKartProductsService(kartId)
+
+    res.json(result)
 }
