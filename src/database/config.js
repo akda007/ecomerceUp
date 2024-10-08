@@ -7,7 +7,7 @@ import { KartProductsModel } from "../models/kartproducts.model.js";
 
 const sequelize = new Sequelize('ecomerce', 'root', '123321', {
     host: 'localhost',
-    dialect: 'mysql', // Use 'mysql' as the dialect directly
+    dialect: 'mysql',
     port: 3306,
     logging: console.log,
 })

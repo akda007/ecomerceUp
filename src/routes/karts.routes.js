@@ -1,10 +1,21 @@
 import { Router } from "express";
-import { addProductsToKart, listKarts } from "../controllers/karts.controller.js";
+import {
+    addProductsToKartController,
+    getKartProductsController,
+    listKartsController,
+    removeProductFromKartController
+} from "../controllers/karts.controller.js";
 
 
 const kartRouter = Router()
 
-kartRouter.get("/karts", listKarts)
-kartRouter.post("/karts/:kartId", addProductsToKart)
+
+kartRouter.get("/karts", listKartsController);
+
+kartRouter.post("/karts/:kartId", addProductsToKartController);
+
+kartRouter.get("/karts/:kartId/products", getKartProductsController);
+
+kartRouter.delete("/karts/:kartId/products", removeProductFromKartController);
 
 export default kartRouter

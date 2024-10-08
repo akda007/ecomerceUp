@@ -1,5 +1,5 @@
 import { Products } from "../database/config";
-
+import { AppError } from "../errors";
 
 export const createProductService = async (name, description, price, stock) => {
     try {
@@ -12,39 +12,19 @@ export const createProductService = async (name, description, price, stock) => {
 
         return newProduct;
     } catch (error) {
-        console.error("Error creating product: ", error);
-        throw error;
+        throw new AppError("Error creating product: " + error.message, 500);
     }
 };
-
 
 export const getAllProductsService = async () => {
     try {
         const products = await Products.findAll();
         return products;
     } catch (error) {
-        console.error("Error fetching products: ", error);
-        throw error;
+        throw new AppError("Error fetching products: " + error.message, 500);
     }
 };
 
-
-export const updateProductService = async (productId, updates) => {
-    try {
-        const product = await Products.findByPk(productId);
-
-        if (!product) {
-            console.log(`Product with ID ${productId} not found`);
-            return null;
-        }
-
-        const updatedProduct = await product.update(updates);
-        return updatedProduct;
-    } catch (error) {
-        console.error("Error updating product: ", error);
-        throw error;
-    }
-};
 
 
 export const deleteProductService = async (productId) => {
@@ -54,14 +34,30 @@ export const deleteProductService = async (productId) => {
         });
 
         if (result === 0) {
-            console.log(`Product with ID ${productId} not found`);
-            return null;
+            throw new AppError(`Product with ID ${productId} not found`, 404);
         }
 
-        console.log(`Product with ID ${productId} deleted successfully`);
         return true;
     } catch (error) {
-        console.error("Error deleting product: ", error);
-        throw error;
+        throw new AppError("Error deleting product: " + error.message, 500);
+    }
+};
+
+export const updateProductService = async (productId, updatedData) => {
+    try {
+        const product = await Products.findByPk(productId);
+
+        if (!product) {
+            throw new AppError("Product not found!", 404);
+        }
+
+        await product.update(updatedData);
+
+        return product;
+    } catch (error) {
+        if (error instanceof AppError) {
+            throw error;
+        }
+        throw new AppError("An unexpected error occurred while updating the product.", 500);
     }
 };

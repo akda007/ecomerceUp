@@ -5,6 +5,7 @@ import productRouter from "./routes/product.routes.js"
 import authenticationRouter from "./routes/authentication.routes.js"
 import kartRouter from "./routes/karts.routes.js"
 import { errorHandler } from "./middlewares/error.middleware.js"
+import { verifyToken } from "./middlewares/auth.middleware.js"
 
 const app = express()
 
@@ -13,6 +14,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use(authenticationRouter)
+
+app.use(verifyToken)
 
 app.use(productRouter)
 app.use(kartRouter)

@@ -1,4 +1,4 @@
-import { createProductService, getAllProductsService, updateProductService, deleteProductService } from "../services/products.services.js";
+import { createProductService, deleteProductService, getAllProductsService, updateProductService } from "../services/product.services.js";
 
 export const createProductController = async (req, res) => {
     const { name, description, price, stock } = req.body;
@@ -21,19 +21,14 @@ export const getAllProductsController = async (req, res) => {
 };
 
 export const updateProductController = async (req, res) => {
-    const { id } = req.params;
-    const updates = req.body;
+    const { productId } = req.params;
+    const updatedData = req.body;
 
     try {
-        const updatedProduct = await updateProductService(id, updates);
-
-        if (updatedProduct) {
-            res.status(200).json(updatedProduct);
-        } else {
-            res.status(404).json({ message: "Product not found" });
-        }
+        const updatedProduct = await updateProductService(productId, updatedData);
+        res.json({ message: "Product updated successfully", updatedProduct });
     } catch (error) {
-        res.status(500).json({ message: "Error updating product", error });
+        res.status(error.statusCode || 500).json({ error: error.message });
     }
 };
 
