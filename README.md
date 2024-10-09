@@ -13,7 +13,7 @@ Requisitos para rodar o sistema:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/ecommerceUp
+git clone https://github.com/akda007/ecomerceUp
 cd ecommerceUp
 ```
 
