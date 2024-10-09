@@ -1,4 +1,4 @@
-import { Users } from "../database/config"
+import { Users, Karts, Transaction } from "../database/config"
 import { AppError } from "../errors"
 import { cleanUpKartService, getKartProductsService } from "./kart.services"
 
@@ -26,6 +26,12 @@ export const processPayment = async (userId, method) => {
     });
 
     await cleanUpKartService(kart.id)
+
+    await Promise.all(items.map(async (value) => {
+        console.log(items.product)
+        items.product.stock -= 2
+        return await items.product.save()
+    }))
 
     return transaction
 }

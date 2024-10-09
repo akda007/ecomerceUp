@@ -19,10 +19,17 @@ export const KartProductsModel = (sequelize) => {
             },
         },
         amount: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: false
         }
     });
+
+    KartProduct.associate = (models) => {
+        KartProduct.belongsTo(models.Products, {
+            foreignKey: 'productId',
+            as: 'product',  // Alias for the join
+        });
+    }
 
     return KartProduct;
 };

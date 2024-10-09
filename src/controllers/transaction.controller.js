@@ -2,7 +2,7 @@ import { getTransactionStatus as getTransactionStatusService, processPayment } f
 
 
 export const processPaymentController = async (req, res) => {
-    const { userId } = req.params;
+    const userId = res.locals.session.userId
     const { method } = req.body;
 
     const transaction = await processPayment(userId, method);

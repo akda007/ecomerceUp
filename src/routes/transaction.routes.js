@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { getTransactionStatusController, processPaymentController } from "../controllers/transaction.controller.js";
+import { getTransactionStatusController, processPaymentController } from "../controllers/transaction.controller"
 
 const paymentRouter = Router();
 
-paymentRouter.post("/payment/:userId", processPaymentController);
+paymentRouter.post("/payment", processPaymentController);
 paymentRouter.get("/payment/status/:transactionId", getTransactionStatusController);
 
 

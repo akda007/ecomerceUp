@@ -1,9 +1,10 @@
 import { Sequelize } from "sequelize"
 import { MySqlDialect } from "@sequelize/mysql";
-import { KartsModel } from "../models/kart.model.js";
-import { ProductsModel} from "../models/product.model.js";
-import { UsersModel } from "../models/user.model.js";
-import { KartProductsModel } from "../models/kartproducts.model.js";
+import { KartsModel } from "../models/kart.model"
+import { ProductsModel} from "../models/product.model"
+import { UsersModel } from "../models/user.model"
+import { KartProductsModel } from "../models/kartproducts.model"
+import { TransactionModel } from "../models/transaction.model";
 
 const sequelize = new Sequelize('ecomerce', 'root', '123321', {
     host: 'localhost',
@@ -16,9 +17,11 @@ export const Users = UsersModel(sequelize)
 export const Karts = KartsModel(sequelize)
 export const Products = ProductsModel(sequelize)
 export const KartProducts = KartProductsModel(sequelize)
+export const Transaction = TransactionModel(sequelize)
 
 Karts.associate({Products: Products})
 Products.associate({Karts: Karts})
+KartProducts.associate({Products: Products})
 
 
 Users.afterCreate(async (user, options) => {

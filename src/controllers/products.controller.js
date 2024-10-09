@@ -1,4 +1,4 @@
-import { createProductService, deleteProductService, getAllProductsService, updateProductService } from "../services/product.services.js";
+import { createProductService, deleteProductService, getAllProductsService, updateProductService } from "../services/product.services"
 
 export const createProductController = async (req, res) => {
     const { name, description, price, stock } = req.body;

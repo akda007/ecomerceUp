@@ -1,4 +1,4 @@
-import { KartProducts, Products } from "../database/config"
+import { KartProducts, Karts, Products, Users } from "../database/config"
 import { AppError } from "../errors";
 
 export const addProductToKartService = async (kartId, productId, quantity = 1) => {
@@ -77,9 +77,12 @@ export const removeProductFromKartService = async (kartId, productId, quantity =
 
 export const getKartProductsService = async (kartId) => {
     try {
-        const kartProducts = await KartProducts.find({
+        const kartProducts = await KartProducts.findAll({
             where: { kartId: kartId },
-            include: [Products]
+            include: [{
+                model: Products,   // Join with Products model
+                as: 'product',     // Alias (if necessary)
+            }]
         });
 
         if (!kartProducts) {
@@ -88,6 +91,7 @@ export const getKartProductsService = async (kartId) => {
 
         return kartProducts;
     } catch (error) {
+        console.log(error)
         if (error instanceof AppError) {
             throw error; 
         }
@@ -110,4 +114,11 @@ export const cleanUpKartService = async (kartId) => {
         }
         throw new AppError("An unexpected error occurred while cleaning up the kart.", 500);
     }
+}
+
+
+export const getKartService = async (userId) => {
+    const kart = await Karts.findOne({userId})
+    
+    return kart
 }

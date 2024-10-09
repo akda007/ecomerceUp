@@ -21,7 +21,7 @@ export const verifyToken = async (req, res, next) => {
 
     const decoded = await jwt.verify(jwtString, secretToken)
 
-    res.locals.sessionInfo = decoded
+    res.locals.session = decoded
     next()
 }
 

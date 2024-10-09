@@ -31,6 +31,8 @@ export const ProductsModel = (sequelize) => {
             through: 'KartProducts',
             foreignKey: 'productId',
             as: 'karts',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
         });
     };
 

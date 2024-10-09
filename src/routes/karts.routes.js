@@ -4,7 +4,7 @@ import {
     getKartProductsController,
     listKartsController,
     removeProductFromKartController
-} from "../controllers/karts.controller.js";
+} from "../controllers/karts.controller"
 
 
 const kartRouter = Router()
@@ -12,10 +12,10 @@ const kartRouter = Router()
 
 kartRouter.get("/karts", listKartsController);
 
-kartRouter.post("/karts/:kartId", addProductsToKartController);
+kartRouter.post("/kart/products/add", addProductsToKartController);
 
-kartRouter.get("/karts/:kartId/products", getKartProductsController);
+kartRouter.get("/kart/products/get", getKartProductsController);
 
-kartRouter.delete("/karts/:kartId/products", removeProductFromKartController);
+kartRouter.delete("/kart/products/delete", removeProductFromKartController);
 
 export default kartRouter

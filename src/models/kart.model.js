@@ -16,12 +16,14 @@ export const KartsModel = (sequelize) => {
             },
         },
     })
-
+    
     Kart.associate = (models) => {
         Kart.belongsToMany(models.Products, {
             through: 'KartProducts',
             foreignKey: 'kartId',
             as: 'products',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
         });
     };
 

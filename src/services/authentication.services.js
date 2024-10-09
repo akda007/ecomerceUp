@@ -5,7 +5,7 @@ import { AppError } from "../errors"
 import { secretToken } from "../middlewares/auth.middleware"
 
 export const registerUserService = async (username, email, password) => {
-    const userExists = await Users.findOne({username})
+    const userExists = await Users.findOne({ where: { username: username } })
 
     if (userExists)
         throw new AppError("Username is already registered!", 400)
@@ -17,7 +17,7 @@ export const registerUserService = async (username, email, password) => {
     const user = await Users.create({
         username,
         email,
-        hashedPw
+        password: hashedPw
     })
 
     return user
@@ -25,7 +25,7 @@ export const registerUserService = async (username, email, password) => {
 
 
 export const loginUserService = async (username, password) => {
-    const userExists = await Users.findOne({username})
+    const userExists = await Users.findOne({username: username})
 
     if (!userExists)
         throw new AppError("User not found!", 404)
