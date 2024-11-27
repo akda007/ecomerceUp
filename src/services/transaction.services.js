@@ -40,8 +40,14 @@ export const processPayment = async (userId, method) => {
     return transaction
 }
 
+export const getUserTransactions = async (userId) => {
+    const transactions = await Transaction.findAll({where: { userId }});
+
+    return transactions;
+}
+
 export const getTransactionStatus = async (transactionId) => {
-    const transaction = await Transactions.findByPk(transactionId);
+    const transaction = await Transaction.findByPk(transactionId);
 
     if (!transaction) {
         throw new AppError("Transaction not found", 404);

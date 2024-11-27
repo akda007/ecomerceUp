@@ -19,6 +19,11 @@ export const createProductService = async (name, description, price, stock) => {
 export const getAllProductsService = async () => {
     try {
         const products = await Products.findAll();
+
+        products.forEach(p => {
+            p.price = Number(p.price)
+        })
+
         return products;
     } catch (error) {
         throw new AppError("Error fetching products: " + error.message, 500);

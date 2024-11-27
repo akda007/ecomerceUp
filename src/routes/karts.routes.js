@@ -16,6 +16,6 @@ kartRouter.post("/kart/products/add", addProductsToKartController);
 
 kartRouter.get("/kart/products/get", getKartProductsController);
 
-kartRouter.delete("/kart/products/delete", removeProductFromKartController);
+kartRouter.post("/kart/products/delete", removeProductFromKartController);
 
 export default kartRouter
