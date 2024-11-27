@@ -5,8 +5,9 @@ import { ProductsModel} from "../models/product.model"
 import { UsersModel } from "../models/user.model"
 import { KartProductsModel } from "../models/kartproducts.model"
 import { TransactionModel } from "../models/transaction.model";
+import { SupplierModel } from "../models/supplier.model";
 
-const sequelize = new Sequelize('ecomerce', 'root', '123321', {
+const sequelize = new Sequelize('ecomerce', 'root', 'positivo', {
     host: 'localhost',
     dialect: 'mysql',
     port: 3306,
@@ -18,11 +19,11 @@ export const Karts = KartsModel(sequelize)
 export const Products = ProductsModel(sequelize)
 export const KartProducts = KartProductsModel(sequelize)
 export const Transaction = TransactionModel(sequelize)
+export const Supplier = SupplierModel(sequelize)
 
 Karts.associate({Products: Products})
 Products.associate({Karts: Karts})
 KartProducts.associate({Products: Products})
-
 
 Users.afterCreate(async (user, options) => {
     try {

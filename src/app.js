@@ -7,6 +7,7 @@ import kartRouter from "./routes/karts.routes.js"
 import { errorHandler } from "./middlewares/error.middleware.js"
 import { verifyToken } from "./middlewares/auth.middleware.js"
 import paymentRouter from "./routes/transaction.routes.js"
+import supplierRouter from "./routes/supplier.routes.js"
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use(verifyToken)
 app.use(productRouter)
 app.use(kartRouter)
 app.use(paymentRouter)
+app.use(supplierRouter)
 
 //Middleware handle errors on a response
 app.use(errorHandler)
