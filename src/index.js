@@ -4,5 +4,5 @@ import app from "./app.js"
     
     const port = 8080
 
-    app.listen(port, () => { console.log(`Server started at: http://localhost:${port}/`)})
+    app.listen(port, "0.0.0.0", () => { console.log(`Server started at: http://localhost:${port}/`)})
 })()
