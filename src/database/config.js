@@ -33,7 +33,7 @@ if (hasErrors)
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PW, {
     host: DB_HOST,
-    dialect: PostgresDialect,
+    dialect: "postgres",
     port: DB_PORT,
     logging: console.log,
 })
