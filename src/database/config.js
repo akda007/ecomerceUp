@@ -1,5 +1,4 @@
 import { Sequelize } from "sequelize"
-import { MySqlDialect } from "@sequelize/mysql";
 import { KartsModel } from "../models/kart.model"
 import { ProductsModel} from "../models/product.model"
 import { UsersModel } from "../models/user.model"
@@ -7,18 +6,18 @@ import { KartProductsModel } from "../models/kartproducts.model"
 import { TransactionModel } from "../models/transaction.model";
 import { SupplierModel } from "../models/supplier.model";
 import { configDotenv } from "dotenv";
+import { PostgresDialect } from "@sequelize/postgres"
 
 configDotenv()
 
 const DB_HOST = process.env.DB_HOST;
 const DB_NAME = process.env.DB_NAME;
-const DB_DIALECT = process.env.DB_DIALECT;
 const DB_PORT = process.env.DB_PORT;
 const DB_PW = process.env.DB_PW;
 const DB_USER = process.env.DB_USER;
 
 const verifyList = {
-    DB_HOST, DB_NAME, DB_DIALECT, DB_PORT, DB_PW, DB_USER
+    DB_HOST, DB_NAME, DB_PORT, DB_PW, DB_USER
 }
 
 let hasErrors = false;
@@ -34,7 +33,7 @@ if (hasErrors)
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PW, {
     host: DB_HOST,
-    dialect: DB_DIALECT,
+    dialect: PostgresDialect,
     port: DB_PORT,
     logging: console.log,
 })
