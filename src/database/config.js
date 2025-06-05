@@ -35,7 +35,13 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PW, {
     host: DB_HOST,
     dialect: "postgres",
     port: DB_PORT,
-    logging: console.log,
+    logging: false,
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+    }
 })
 
 export const Users = UsersModel(sequelize)

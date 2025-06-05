@@ -20,17 +20,19 @@ export const registerUserService = async (username, email, password) => {
         password: hashedPw
     })
 
+
     return user
 }
 
 
 export const loginUserService = async (username, password) => {
-    const userExists = await Users.findOne({username: username})
+    const userExists = await Users.findOne({ where: {username: username}})
 
     if (!userExists)
         throw new AppError("User not found!", 404)
 
-    const result = await bcrypt.compare(password, userExists.password)
+    const result = await bcrypt.compare(password.trim(), userExists.password)
+
 
     if (!result)
         throw new AppError("Unauthorized!", 401)
@@ -39,6 +41,7 @@ export const loginUserService = async (username, password) => {
         sub: username,
         userId: userExists.id
     }, secretToken, {algorithm: "HS256", expiresIn: "24h"})
+    
 
     return token
 }
